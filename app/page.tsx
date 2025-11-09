@@ -7,6 +7,8 @@ export default function Page() {
   const [showAbout, setShowAbout] = useState(false);
   const [showSocial, setShowSocial] = useState(false);
   const [showContact, setShowContact] = useState(false);
+  // Drawer (mobile menu)
+  const [showMenu, setShowMenu] = useState(false);
 
   useEffect(() => {
     // canonical + og:url
@@ -17,18 +19,16 @@ export default function Page() {
       l.setAttribute('rel', 'canonical');
       l.setAttribute('href', href);
       document.head.appendChild(l);
-    } else {
-      link.href = href;
-    }
+    } else { link.href = href; }
     const og = document.createElement('meta');
     og.setAttribute('property', 'og:url');
     og.setAttribute('content', href);
     document.head.appendChild(og);
 
-    // close modal on ESC
+    // close on ESC
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        setShowAbout(false); setShowSocial(false); setShowContact(false);
+        setShowAbout(false); setShowSocial(false); setShowContact(false); setShowMenu(false);
       }
     };
     window.addEventListener('keydown', onKey);
@@ -39,6 +39,7 @@ export default function Page() {
     const el = document.querySelector(id);
     if (el) window.scrollTo({ top: (el as HTMLElement).offsetTop - 84, behavior: 'smooth' });
   };
+  const closeMenu = () => setShowMenu(false);
 
   return (
     <main className="container">
@@ -46,6 +47,8 @@ export default function Page() {
       <header className="topbar" role="banner">
         <div className="topbar-inner">
           <div className="brand">MR NIPUN OFC / TECH-WEB</div>
+
+          {/* Desktop buttons */}
           <div className="menu" role="navigation" aria-label="Main">
             <button className="btn btn-primary" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Home</button>
             <button className="btn" onClick={() => setShowAbout(true)}>About</button>
@@ -54,8 +57,47 @@ export default function Page() {
             <button className="btn" onClick={() => setShowSocial(true)}>Social</button>
             <button className="btn" onClick={() => setShowContact(true)}>Contact</button>
           </div>
+
+          {/* Mobile hamburger */}
+          <button
+            aria-label="Open menu"
+            aria-controls="mobile-drawer"
+            aria-expanded={showMenu}
+            className={`hamburger ${showMenu ? 'active' : ''}`}
+            onClick={() => setShowMenu(v => !v)}
+          >
+            <span></span><span></span><span></span>
+          </button>
         </div>
       </header>
+
+      {/* ===== Mobile Drawer ===== */}
+      <div
+        className={`drawer-backdrop ${showMenu ? 'show' : ''}`}
+        onClick={closeMenu}
+        aria-hidden={!showMenu}
+      />
+      <nav id="mobile-drawer" className={`drawer ${showMenu ? 'open' : ''}`} aria-label="Mobile">
+        <h3>Menu</h3>
+        <button className="cta" onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); closeMenu(); }}>
+          <i className="fa-solid fa-house" aria-hidden="true"></i> Home
+        </button>
+        <button onClick={() => { setShowAbout(true); closeMenu(); }}>
+          <i className="fa-solid fa-user" aria-hidden="true"></i> About
+        </button>
+        <button onClick={() => { scroll('#projects'); closeMenu(); }}>
+          <i className="fa-solid fa-diagram-project" aria-hidden="true"></i> Projects
+        </button>
+        <button onClick={() => { scroll('#skills'); closeMenu(); }}>
+          <i className="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i> Skills
+        </button>
+        <button onClick={() => { setShowSocial(true); closeMenu(); }}>
+          <i className="fa-brands fa-hashtag" aria-hidden="true"></i> Social
+        </button>
+        <button onClick={() => { setShowContact(true); closeMenu(); }}>
+          <i className="fa-solid fa-envelope" aria-hidden="true"></i> Contact
+        </button>
+      </nav>
 
       {/* ===== Hero ===== */}
       <section style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', marginTop: 100, marginBottom: 56 }} aria-labelledby="title">
@@ -76,7 +118,7 @@ export default function Page() {
         <p>Full-Stack Developer · UI/UX Designer · Tech Enthusiast</p>
       </section>
 
-      {/* ===== Projects (anchor used by menu) ===== */}
+      {/* ===== Projects ===== */}
       <section id="projects" className="section" aria-labelledby="projects-title">
         <h2 className="section-title" id="projects-title">My Projects</h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(280px,1fr))', gap: 22 }}>
@@ -93,7 +135,7 @@ export default function Page() {
         </div>
       </section>
 
-      {/* ===== Skills (with Font Awesome icons) ===== */}
+      {/* ===== Skills (Font Awesome icons) ===== */}
       <section id="skills" className="section" aria-labelledby="skills-title">
         <h2 className="section-title" id="skills-title">My Skills</h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(200px,1fr))', gap: 18 }}>
@@ -131,8 +173,7 @@ export default function Page() {
       </footer>
 
       {/* ===== Modals ===== */}
-
-      {/* About Modal */}
+      {/* About */}
       <div className={`modal ${showAbout ? 'active' : ''}`} onClick={(e) => { if (e.target === e.currentTarget) setShowAbout(false); }}>
         <div className="modal-card" role="dialog" aria-labelledby="about-modal-title">
           <button className="modal-close" aria-label="Close" onClick={() => setShowAbout(false)}>×</button>
@@ -157,7 +198,7 @@ export default function Page() {
         </div>
       </div>
 
-      {/* Social Modal */}
+      {/* Social */}
       <div className={`modal ${showSocial ? 'active' : ''}`} onClick={(e) => { if (e.target === e.currentTarget) setShowSocial(false); }}>
         <div className="modal-card" role="dialog" aria-labelledby="social-modal-title">
           <button className="modal-close" aria-label="Close" onClick={() => setShowSocial(false)}>×</button>
@@ -188,7 +229,7 @@ export default function Page() {
         </div>
       </div>
 
-      {/* Contact Modal */}
+      {/* Contact */}
       <div className={`modal ${showContact ? 'active' : ''}`} onClick={(e) => { if (e.target === e.currentTarget) setShowContact(false); }}>
         <div className="modal-card" role="dialog" aria-labelledby="contact-modal-title">
           <button className="modal-close" aria-label="Close" onClick={() => setShowContact(false)}>×</button>
@@ -202,4 +243,4 @@ export default function Page() {
       </div>
     </main>
   );
-            }
+                               }
