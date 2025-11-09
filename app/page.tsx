@@ -15,7 +15,9 @@ export default function Page() {
     else { link.href = href; }
     const og = document.createElement('meta'); og.setAttribute('property','og:url'); og.content = href; document.head.appendChild(og);
 
-    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') { setShowAbout(false); setShowSocial(false); setShowContact(false); setShowMenu(false);} };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') { setShowAbout(false); setShowSocial(false); setShowContact(false); setShowMenu(false); }
+    };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
   }, []);
@@ -28,22 +30,22 @@ export default function Page() {
 
   return (
     <main className="container">
-      {/* TOPBAR */}
+      {/* ===== TOPBAR ===== */}
       <header className="topbar" role="banner">
         <div className="topbar-inner">
           <div className="brand">MR NIPUN OFC / TECH-WEB</div>
 
-          {/* Desktop buttons */}
+          {/* Desktop menu */}
           <div className="menu" role="navigation" aria-label="Main">
-            <button className="btn btn-primary" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Home</button>
-            <button className="btn" onClick={() => setShowAbout(true)}>About</button>
-            <button className="btn" onClick={() => scroll('#projects')}>Projects</button>
-            <button className="btn" onClick={() => scroll('#skills')}>Skills</button>
-            <button className="btn" onClick={() => setShowSocial(true)}>Social</button>
-            <button className="btn" onClick={() => setShowContact(true)}>Contact</button>
+            <button className="btn btn-primary" type="button" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Home</button>
+            <button className="btn" type="button" onClick={() => setShowAbout(true)}>About</button>
+            <button className="btn" type="button" onClick={() => scroll('#projects')}>Projects</button>
+            <button className="btn" type="button" onClick={() => scroll('#skills')}>Skills</button>
+            <button className="btn" type="button" onClick={() => setShowSocial(true)}>Social</button>
+            <button className="btn" type="button" onClick={() => setShowContact(true)}>Contact</button>
           </div>
 
-          {/* Hamburger (mobile) */}
+          {/* Mobile hamburger */}
           <button
             aria-label="Open menu"
             aria-controls="mobile-drawer"
@@ -58,7 +60,7 @@ export default function Page() {
         </div>
       </header>
 
-      {/* DRAWER (mobile) */}
+      {/* ===== MOBILE DRAWER ===== */}
       <div className={`drawer-backdrop ${showMenu ? 'show' : ''}`} onClick={closeMenu} aria-hidden={!showMenu}/>
       <nav id="mobile-drawer" className={`drawer ${showMenu ? 'open' : ''}`} aria-label="Mobile navigation">
         <div className="drawer-header">
@@ -66,18 +68,19 @@ export default function Page() {
           <button className="drawer-close" onClick={closeMenu} aria-label="Close menu">×</button>
         </div>
         <ul className="navlist" role="menu" aria-label="Menu items">
-          <li role="none"><button className="navitem cta" role="menuitem" onClick={() => { window.scrollTo({ top: 0, behavior:'smooth' }); closeMenu(); }}>Home</button></li>
-          <li role="none"><button className="navitem" role="menuitem" onClick={() => { setShowAbout(true); closeMenu(); }}>About</button></li>
-          <li role="none"><button className="navitem" role="menuitem" onClick={() => { scroll('#projects'); closeMenu(); }}>Projects</button></li>
-          <li role="none"><button className="navitem" role="menuitem" onClick={() => { scroll('#skills'); closeMenu(); }}>Skills</button></li>
-          <li role="none"><button className="navitem" role="menuitem" onClick={() => { setShowSocial(true); closeMenu(); }}>Social</button></li>
-          <li role="none"><button className="navitem" role="menuitem" onClick={() => { setShowContact(true); closeMenu(); }}>Contact</button></li>
-          <li role="none"><button className="navitem" role="menuitem" onClick={() => { scroll('#privacy'); closeMenu(); }}>Privacy</button></li>
+          <li role="none"><button className="navitem cta" type="button" role="menuitem" onClick={() => { window.scrollTo({ top: 0, behavior:'smooth' }); closeMenu(); }}>Home</button></li>
+          <li role="none"><button className="navitem" type="button" role="menuitem" onClick={() => { setShowAbout(true); closeMenu(); }}>About</button></li>
+          <li role="none"><button className="navitem" type="button" role="menuitem" onClick={() => { scroll('#info'); closeMenu(); }}>Personal Info</button></li>
+          <li role="none"><button className="navitem" type="button" role="menuitem" onClick={() => { scroll('#projects'); closeMenu(); }}>Projects</button></li>
+          <li role="none"><button className="navitem" type="button" role="menuitem" onClick={() => { scroll('#skills'); closeMenu(); }}>Skills</button></li>
+          <li role="none"><button className="navitem" type="button" role="menuitem" onClick={() => { setShowSocial(true); closeMenu(); }}>Social</button></li>
+          <li role="none"><button className="navitem" type="button" role="menuitem" onClick={() => { setShowContact(true); closeMenu(); }}>Contact</button></li>
+          <li role="none"><button className="navitem" type="button" role="menuitem" onClick={() => { scroll('#privacy'); closeMenu(); }}>Privacy</button></li>
         </ul>
       </nav>
 
-      {/* HERO */}
-      <section style={{ display:'flex', flexDirection:'column', alignItems:'center', textAlign:'center', marginTop:100, marginBottom:56 }} aria-labelledby="title">
+      {/* ===== HERO ===== */}
+      <section style={{ display:'flex', flexDirection:'column', alignItems:'center', textAlign:'center', marginTop:100, marginBottom:30 }} aria-labelledby="title">
         <div style={{ position:'relative', width:240, height:240, marginBottom:24 }} aria-hidden="true">
           <div style={{ position:'absolute', inset:-10, borderRadius:'50%', background:'conic-gradient(#e63946,#7678ed,#d00000,#e63946)', animation:'spin 3s linear infinite', zIndex:1 }} />
           <div style={{ position:'absolute', inset:-10, borderRadius:'50%', overflow:'hidden' }}>
@@ -91,10 +94,46 @@ export default function Page() {
           />
         </div>
         <h1 id="title" style={{ fontSize:34, marginBottom:10, background:'linear-gradient(90deg,#e63946,#7678ed)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent' }}>MR NIPUN OFC / TECH-WEB</h1>
-        <p>Full-Stack Developer · UI/UX Designer · Tech Enthusiast</p>
+        <p>Full-Stack Developer &#183; UI/UX Designer &#183; Tech Enthusiast</p>
       </section>
 
-      {/* PROJECTS */}
+      {/* ===== PERSONAL INFO (under photo) ===== */}
+      <section id="info" className="section info-card" aria-labelledby="info-title">
+        <h2 id="info-title" className="info-title">Personal Information</h2>
+        <div className="info-underline"></div>
+        <div className="info-list">
+          <div className="info-row">
+            <div className="info-icon"><i className="fa-solid fa-user"></i></div>
+            <div className="info-kv"><strong>Name:</strong> H.M. NIPUN DHANUJAYA</div>
+          </div>
+          <div className="info-row">
+            <div className="info-icon"><i className="fa-solid fa-cake-candles"></i></div>
+            <div className="info-kv"><strong>Age:</strong> 18</div>
+          </div>
+          <div className="info-row">
+            <div className="info-icon"><i className="fa-solid fa-location-dot"></i></div>
+            <div className="info-kv"><strong>From:</strong> Sri Lanka</div>
+          </div>
+          <div className="info-row">
+            <div className="info-icon"><i className="fa-solid fa-phone"></i></div>
+            <div className="info-kv">
+              <strong>Contact:</strong>{' '}
+              <a href="https://wa.me/+94757255903" target="_blank" rel="noopener" style={{color:'#e63946', textDecoration:'none'}}>
+                +94 75 725 5903
+              </a>
+            </div>
+          </div>
+          <div className="info-row">
+            <div className="info-icon"><i className="fa-solid fa-envelope"></i></div>
+            <div className="info-kv">
+              <strong>Email:</strong>{' '}
+              <a href="mailto:mrnipun@techweb.com" style={{color:'#e63946', textDecoration:'none'}}>mrnipun@techweb.com</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== PROJECTS ===== */}
       <section id="projects" className="section" aria-labelledby="projects-title">
         <h2 className="section-title" id="projects-title">My Projects</h2>
         <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(280px,1fr))', gap:22 }}>
@@ -110,7 +149,7 @@ export default function Page() {
         </div>
       </section>
 
-      {/* SKILLS */}
+      {/* ===== SKILLS ===== */}
       <section id="skills" className="section" aria-labelledby="skills-title">
         <h2 className="section-title" id="skills-title">My Skills</h2>
         <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(200px,1fr))', gap:18 }}>
@@ -134,13 +173,13 @@ export default function Page() {
         </div>
       </section>
 
-      {/* PRIVACY anchor */}
+      {/* ===== PRIVACY anchor ===== */}
       <section id="privacy" className="section" aria-labelledby="privacy-title">
         <h2 className="section-title" id="privacy-title">Privacy Policy</h2>
         <p>We may collect personal information to provide and improve services. We never sell your data.</p>
       </section>
 
-      {/* FOOTER */}
+      {/* ===== FOOTER ===== */}
       <footer role="contentinfo" style={{ textAlign:'center', padding:'28px 0', marginTop:40, borderTop:'1px solid var(--glass-border)' }}>
         <div style={{ display:'flex', justifyContent:'center', gap:20, marginBottom:16, flexWrap:'wrap' }}>
           <a href="#top">Home</a>
@@ -151,7 +190,7 @@ export default function Page() {
         <div style={{ color:'#bdbdbd', fontSize:13 }}>© {new Date().getFullYear()} MR NIPUN OFC / TECH-WEB. All Rights Reserved.</div>
       </footer>
 
-      {/* MODALS */}
+      {/* ===== MODALS ===== */}
       {/* About */}
       <div className={`modal ${showAbout ? 'active' : ''}`} onClick={(e)=>{ if (e.target === e.currentTarget) setShowAbout(false); }}>
         <div className="modal-card" role="dialog" aria-labelledby="about-modal-title">
@@ -196,4 +235,4 @@ export default function Page() {
       </div>
     </main>
   );
-            }
+          }
