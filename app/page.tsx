@@ -73,14 +73,14 @@ export default function Page() {
       <section id="about" className="section" aria-labelledby="about-title">
         <h2 className="section-title" id="about-title">Personal Information</h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(240px,1fr))', gap: 14 }}>
-          <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}><span>👤</span><div><strong>Name:</strong> H.M. NIPUN DHANUJAYA (aka "MR NIPUN")</div></div>
+          <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}><span>👤</span><div><strong>Name:</strong> H.M. NIPUN DHANUJAYA (aka &quot;MR NIPUN&quot;)</div></div>
           <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}><span>🎂</span><div><strong>Age:</strong> 18</div></div>
           <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}><span>📍</span><div><strong>From:</strong> Sri Lanka</div></div>
           <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}><span>☎️</span><div><strong>Contact:</strong> <a style={{ color: '#e63946', textDecoration: 'none' }} href="https://wa.me/+94757255903" target="_blank" rel="noopener">+94 75 725 5903</a></div></div>
           <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}><span>📧</span><div><strong>Email:</strong> <a style={{ color: '#e63946', textDecoration: 'none' }} href="mailto:mrnipun@techweb.com">mrnipun@techweb.com</a></div></div>
         </div>
         <p style={{ marginTop: 14, lineHeight: 1.7 }}>
-          Hello! I'm <strong>MR NIPUN</strong>, a passionate full-stack developer and designer building modern web apps and digital experiences. I work across
+          Hello! I&#39;m <strong>MR NIPUN</strong>, a passionate full-stack developer and designer building modern web apps and digital experiences. I work across
           frontend and backend, and love IoT with Arduino. I also enjoy photography, motion graphics, and brand identity design.
         </p>
       </section>
@@ -181,4 +181,4 @@ export default function Page() {
       </footer>
     </main>
   );
-          }
+                       }
