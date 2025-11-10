@@ -1,27 +1,36 @@
-import type { Metadata } from "next";
-import "./globals.css";
-import Header from "./components/Header";  // ← changed
-import Footer from "./components/Footer";  // ← changed
+import type { Metadata } from 'next';
+import './globals.css';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import DragonIntro from '@/components/DragonIntro'; // 🔥 ADD
 
 export const metadata: Metadata = {
-  title: "MR NIPUN OFC / TECH-WEB",
-  description: "Full-Stack Developer • UI/UX Designer • Tech Enthusiast",
+  title: 'MR NIPUN OFC / TECH-WEB',
+  description: 'Official website of H.M. NIPUN DHANUJAYA (MR NIPUN OFC).',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap"
           rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+          crossOrigin="anonymous"
+          referrerPolicy="no-referrer"
         />
       </head>
       <body>
+        {/* 🔥 Cinematic intro (shows once per session) */}
+        <DragonIntro />
+
+        {/* Global header */}
         <Header />
-        <main className="container">{children}</main>
+
+        <div className="page-wrap">{children}</div>
+
+        {/* Global footer */}
         <Footer />
       </body>
     </html>
