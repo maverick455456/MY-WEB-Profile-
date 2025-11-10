@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Header from "../components/Header";  // <-- relative
-import Footer from "../components/Footer";  // <-- relative
+import Header from "./components/Header";  // ← changed
+import Footer from "./components/Footer";  // ← changed
 
 export const metadata: Metadata = {
   title: "MR NIPUN OFC / TECH-WEB",
